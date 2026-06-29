@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>許又文 Hsu Yu Wen — 產品經理 · 行銷企劃</title>
+<meta name="description" content="許又文 Hsu Yu Wen 的作品集。政大通 NCCUPass 第三代 PM，做過 AI 失物招領、微軟校園行銷與企業顧問專案。從用戶痛點出發，把模糊的想法變成可被驗證的產品。尋找 2026 PM／行銷實習。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ---- light premium: soft porcelain + clay accent (OKLCH) ---- */
+  --bg:oklch(0.963 0.0035 255);
+  --bg-2:oklch(0.992 0.002 255);
+  --bg-3:oklch(0.945 0.004 255);
+  --ink:oklch(0.235 0.012 262);
+  --muted:oklch(0.47 0.014 262);
+  --faint:oklch(0.62 0.012 262);
+  --line:oklch(0.885 0.006 262);
+  --line-soft:oklch(0.925 0.005 262);
+  --accent:oklch(0.52 0.084 52);        /* deep clay / bronze, text-safe */
+  --accent-dim:oklch(0.62 0.07 54);
+
+  --display:"Marcellus","Noto Serif TC",Georgia,serif;
+  --sans:"Noto Sans TC",system-ui,sans-serif;
+
+  --pad:clamp(22px,5vw,72px);
+  --maxw:1180px;
+  --z-sticky:100;
+  --z-lanyard:60;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);color:var(--ink);
+  line-height:1.7;font-weight:400;letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(78% 52% at 84% -6%, color-mix(in oklch,#c3cedd 42%,transparent), transparent 60%),
+    radial-gradient(68% 48% at 6% 2%, color-mix(in oklch,#f1ddc4 46%,transparent), transparent 60%),
+    radial-gradient(85% 60% at 100% 104%, color-mix(in oklch,#d0ad88 26%,transparent), transparent 62%),
+    radial-gradient(72% 58% at -6% 102%, color-mix(in oklch,#c3cedd 24%,transparent), transparent 62%);
+  background-attachment:fixed;background-repeat:no-repeat;
+}
+::selection{background:var(--accent);color:#fff}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ---------- brandmark + staggered side menu ---------- */
+.brandmark{position:fixed;top:clamp(18px,2.8vw,30px);left:var(--pad);z-index:122;
+  font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:.01em;color:var(--ink);
+  display:inline-flex;align-items:center;gap:9px}
+.brandmark .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.brandmark .en{font-family:var(--sans);font-size:12px;color:var(--faint)}
+
+.menu-wrap{position:fixed;inset:0;z-index:110;pointer-events:none}
+.sm-scrim{position:absolute;inset:0;background:rgba(18,20,28,.34);opacity:0;visibility:hidden;
+  transition:opacity .45s ease,visibility .45s;pointer-events:none}
+.menu-wrap.open .sm-scrim{opacity:1;visibility:visible;pointer-events:auto}
+
+.sm-toggle{pointer-events:auto;position:fixed;top:clamp(13px,2.4vw,24px);right:var(--pad);z-index:130;
+  display:inline-flex;align-items:center;gap:13px;background:none;border:none;cursor:pointer;padding:8px 2px;
+  font-family:var(--sans);font-size:13.5px;letter-spacing:.06em;color:var(--ink);transition:color .4s ease}
+.menu-wrap.open .sm-toggle{color:#fff}
+.sm-toggle-text{position:relative;height:1.25em;width:3.6em;overflow:hidden;text-align:right}
+.sm-toggle-text .sm-line{display:block;height:1.25em;line-height:1.25em;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.menu-wrap.open .sm-toggle-text .sm-line{transform:translateY(-100%)}
+.sm-icon{position:relative;width:19px;height:19px;display:inline-block;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.menu-wrap.open .sm-icon{transform:rotate(225deg)}
+.sm-icon span{position:absolute;top:50%;left:50%;width:18px;height:1.8px;background:currentColor;border-radius:2px;transform:translate(-50%,-50%)}
+.sm-icon span.v{transform:translate(-50%,-50%) rotate(90deg)}
+
+.sm-prelayers{position:absolute;top:0;right:0;bottom:0;width:min(84vw,448px);pointer-events:none}
+.sm-prelayer{position:absolute;inset:0;transform:translateX(100%);transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.sm-prelayer.p1{background:var(--accent)}
+.sm-prelayer.p2{background:oklch(0.42 0.05 50)}
+.menu-wrap.open .sm-prelayer{transform:translateX(0)}
+.menu-wrap.open .sm-prelayer.p1{transition-delay:.06s}
+.menu-wrap.open .sm-prelayer.p2{transition-delay:0s}
+
+.sm-panel{pointer-events:auto;position:absolute;top:0;right:0;bottom:0;width:min(84vw,448px);
+  background:var(--ink);color:oklch(0.9 0.01 80);transform:translateX(100%);
+  transition:transform .64s cubic-bezier(.16,1,.3,1) .13s;
+  display:flex;flex-direction:column;justify-content:center;gap:clamp(28px,6vh,56px);
+  padding:clamp(96px,14vh,130px) clamp(34px,6vw,60px) clamp(40px,8vh,72px)}
+.menu-wrap.open .sm-panel{transform:translateX(0)}
+.sm-list{list-style:none;display:flex;flex-direction:column;gap:clamp(6px,1.4vh,14px)}
+.sm-link{display:flex;align-items:baseline;gap:16px;overflow:hidden;padding:4px 0}
+.sm-link .sm-num{font-family:var(--sans);font-size:12.5px;color:var(--accent);letter-spacing:.12em;min-width:2.2em}
+.sm-link .sm-label{font-family:var(--display);font-weight:400;font-size:clamp(21px,4vw,30px);line-height:1.12;
+  color:#fff;display:inline-block;transform:translateY(118%);transition:transform .7s cubic-bezier(.16,1,.3,1),color .3s}
+.menu-wrap.open .sm-link .sm-label{transform:translateY(0)}
+.menu-wrap.open .sm-list li:nth-child(1) .sm-label{transition-delay:.3s}
+.menu-wrap.open .sm-list li:nth-child(2) .sm-label{transition-delay:.38s}
+.menu-wrap.open .sm-list li:nth-child(3) .sm-label{transition-delay:.46s}
+.sm-link:hover .sm-label{color:var(--accent-dim)}
+.sm-socials{margin-top:auto;opacity:0;transform:translateY(16px);transition:opacity .5s ease .52s,transform .5s ease .52s}
+.menu-wrap.open .sm-socials{opacity:1;transform:none}
+.sm-socials h3{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:13px}
+.sm-socials a{display:inline-block;color:oklch(0.86 0.01 80);font-size:15px;
+  border-bottom:1px solid color-mix(in oklch,#fff 24%,transparent);padding-bottom:1px;transition:color .25s}
+.sm-socials a:hover{color:#fff}
+body.menu-open{overflow:hidden}
+
+/* ---------- hero ---------- */
+.hero{position:relative;isolation:isolate;overflow:hidden;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding-block:clamp(84px,11vh,116px) clamp(48px,8vh,90px)}
+.hero .grainient{position:absolute;inset:0;z-index:-2;width:100%;height:100%;display:block;pointer-events:none;
+  -webkit-mask:linear-gradient(180deg,#000 50%,transparent 90%);mask:linear-gradient(180deg,#000 50%,transparent 90%)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(66% 54% at 50% 40%, color-mix(in oklch,var(--bg) 24%,transparent), transparent 64%)}
+.hero .wrap{width:100%}
+.hero .eyebrow{text-align:center;font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(12px,1.8vh,20px)}
+.hero .hi{font-family:var(--display);font-weight:400;text-align:center;
+  font-size:clamp(42px,6.4vw,82px);line-height:1.05;letter-spacing:.004em;color:var(--ink);text-wrap:balance}
+.hero .hi .acc{color:var(--accent)}
+.hero .hi .bch{display:inline-block;white-space:pre;opacity:0;filter:blur(10px);transform:translateY(-16px);
+  animation:blurIn .62s cubic-bezier(.2,.75,.25,1) both}
+@keyframes blurIn{
+  0%{opacity:0;filter:blur(10px);transform:translateY(-16px)}
+  55%{opacity:.55;filter:blur(2.5px);transform:translateY(3px)}
+  100%{opacity:1;filter:blur(0);transform:translateY(0)}
+}
+.hero .hi-sub{text-align:center;margin-top:clamp(13px,1.8vh,20px);font-size:clamp(14.5px,1.6vw,17px);
+  color:var(--muted);max-width:40ch;margin-inline:auto;text-wrap:pretty}
+.hero .hi-sub em{font-style:normal;color:var(--ink);font-weight:500}
+
+.stage{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  gap:clamp(12px,3vw,52px);margin-top:clamp(22px,3.4vh,42px)}
+@media(max-width:860px){
+  .stage{grid-template-columns:1fr;justify-items:center;gap:30px}
+  .stage .lanyard-col{order:1}
+  .stage .desc{order:2;align-items:center;text-align:center}
+}
+.desc{display:flex;flex-direction:column;gap:22px;max-width:230px}
+.desc.right{align-items:flex-end;text-align:right}
+@media(max-width:860px){.desc.right{align-items:center;text-align:center}}
+.mrow .k{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+.mrow .v{font-size:14.5px;color:var(--ink);line-height:1.5;font-weight:300}
+.mrow .v b{font-weight:500}
+
+/* ---------- lanyard (refined) ---------- */
+.lanyard-col{display:flex;justify-content:center;align-items:flex-start}
+@media(max-width:760px){.desc{display:none}}
+.lanyard{position:relative;display:flex;flex-direction:column;align-items:center;
+  transform-origin:50% 0;will-change:transform;touch-action:none;z-index:var(--z-lanyard);
+  animation:drop 1.5s cubic-bezier(.18,.9,.28,1.05) both}
+.lanyard.swaying{animation:sway 7s ease-in-out infinite}
+.lanyard.dragging{animation:none!important;cursor:grabbing}
+@keyframes drop{
+  0%{transform:translateY(-128%) rotate(0deg)}
+  58%{transform:translateY(0) rotate(8deg)}
+  73%{transform:translateY(0) rotate(-5deg)}
+  85%{transform:translateY(0) rotate(3deg)}
+  93%{transform:translateY(0) rotate(-1.4deg)}
+  100%{transform:translateY(0) rotate(0deg)}
+}
+@keyframes sway{0%,100%{transform:rotate(-1.8deg)}50%{transform:rotate(1.8deg)}}
+.lanyard .string{width:6px;height:clamp(52px,7vh,82px);
+  background:linear-gradient(180deg,var(--faint),var(--line));border-radius:0 0 3px 3px}
+.lanyard .clip{width:26px;height:13px;margin-top:-1px;border-radius:4px;
+  background:linear-gradient(#c9ccd2,#8f949c);box-shadow:0 2px 5px rgba(0,0,0,.5);position:relative;z-index:3}
+.lanyard .clip::after{content:"";position:absolute;left:50%;top:9px;transform:translateX(-50%);
+  width:11px;height:15px;border:2.5px solid #8f949c;border-top:none;border-radius:0 0 6px 6px}
+.badge{width:clamp(208px,52vw,250px);background:var(--bg-2);border:1px solid var(--line);border-radius:16px;
+  padding:13px 13px 0;box-shadow:0 30px 56px -26px rgba(40,44,66,.42),0 2px 8px -4px rgba(40,44,66,.16);
+  position:relative;margin-top:7px}
+.badge::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%);
+  width:40px;height:12px;background:var(--bg-2);border:1px solid var(--line);border-bottom:none;border-radius:7px 7px 0 0}
+.badge .photo{border-radius:11px;overflow:hidden;aspect-ratio:3/3.5;background:var(--bg-3);border:1px solid var(--line-soft)}
+.badge .photo img{width:100%;height:100%;object-fit:cover;object-position:center 38%}
+.badge .strip{padding:14px 6px 16px;text-align:center}
+.badge .strip .nm{font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:.01em}
+.badge .strip .en{font-size:10px;letter-spacing:.26em;color:var(--faint);margin-top:5px}
+.badge .strip .div{height:1px;background:var(--line-soft);margin:12px 6px}
+.badge .strip .role{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+
+.hero .cta{margin-top:clamp(34px,5vw,52px);display:flex;justify-content:center}
+.btn{font-family:var(--sans);font-size:14.5px;font-weight:500;padding:14px 30px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--line);background:transparent;color:var(--ink);letter-spacing:.01em;
+  transition:border-color .3s,background .3s,color .3s,transform .3s cubic-bezier(.16,1,.3,1)}
+.btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+/* ---------- section frame ---------- */
+section{padding-block:clamp(64px,9vw,128px);position:relative}
+.shead{margin-bottom:clamp(34px,5vw,60px)}
+.shead h2{font-family:var(--display);font-weight:600;font-size:clamp(28px,4.6vw,46px);letter-spacing:-.03em;
+  line-height:1.05;color:var(--ink)}
+.shead .sline{display:block;margin-top:14px;font-size:14px;color:var(--muted);font-weight:300;max-width:48ch}
+.rule{height:1px;background:var(--line-soft);border:none}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:1.32fr .68fr;gap:clamp(30px,5vw,64px);align-items:center}
+@media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:clamp(32px,7vw,46px)}}
+.manifesto{font-family:var(--display);font-weight:400;font-size:clamp(26px,4vw,46px);line-height:1.25;
+  letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
+.about-marquee{position:relative;height:clamp(360px,56vh,520px);width:min(100%,228px);margin-inline:auto;
+  background:#16171c;border-radius:7px;overflow:hidden;padding:0 22px;
+  box-shadow:0 22px 50px -26px rgba(15,16,22,.7),inset 0 0 0 1px rgba(255,255,255,.05)}
+.about-marquee::before,.about-marquee::after{content:"";position:absolute;top:0;bottom:0;width:8px;z-index:2;
+  background-image:repeating-linear-gradient(180deg, color-mix(in oklch,var(--bg) 90%,transparent) 0 7px, transparent 7px 19px)}
+.about-marquee::before{left:7px}
+.about-marquee::after{right:7px}
+@media(max-width:820px){.about-marquee{height:clamp(330px,52vh,440px);width:min(100%,210px)}}
+.about-mtrack{display:flex;flex-direction:column;will-change:transform;animation:amScroll 30s linear infinite}
+.about-marquee:hover .about-mtrack{animation-play-state:paused}
+.amimg{margin:0 0 9px;border-radius:2px;overflow:hidden;border:1px solid rgba(255,255,255,.09);background:#000}
+.amimg img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;filter:saturate(.96) brightness(.99)}
+@keyframes amScroll{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.about-mtrack{animation:none}}
+.bioline{display:block;color:var(--ink);font-size:clamp(15.5px,1.9vw,18px);letter-spacing:.03em;margin-bottom:12px}
+.manifesto em{font-style:normal;color:var(--accent)}
+.bio{margin-top:clamp(20px,2.6vw,28px);font-size:clamp(15px,1.7vw,17px);line-height:1.78;color:var(--muted);
+  font-weight:300;max-width:54ch;text-wrap:pretty}
+.htags{margin-top:clamp(24px,3.4vw,34px);display:flex;flex-wrap:wrap;gap:12px 20px}
+.htags span{font-family:var(--display);font-size:14px;color:var(--accent);letter-spacing:.03em}
+
+/* ---------- selected work: masonry wall ---------- */
+.work .eyebrow,.about .eyebrow,.skills .eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.masonry{columns:210px;column-gap:14px;margin-block:clamp(28px,4vw,46px) clamp(40px,6vw,64px);
+  margin-inline:calc(50% - 50vw);padding-inline:clamp(16px,4vw,60px)}
+@media(max-width:640px){.masonry{columns:150px;column-gap:11px;padding-inline:16px}}
+.m-item{appearance:none;display:block;width:100%;break-inside:avoid;margin:0 0 14px;padding:0;position:relative;
+  border:1px solid var(--line);border-radius:11px;overflow:hidden;cursor:default;
+  background:#fff center/cover no-repeat;box-shadow:0 14px 30px -20px rgba(40,44,66,.3);
+  transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .3s}
+.m-item:has(.m-name){cursor:pointer}
+.m-item:hover{transform:translateY(-3px);box-shadow:0 20px 38px -20px rgba(40,44,66,.4)}
+.m-item.active{border-color:var(--ink)}
+.m-fill{display:block;width:100%;aspect-ratio:var(--ar,1)}
+.m-name{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:16px;background:color-mix(in oklch,var(--ink) 90%,transparent);color:#fff;
+  font-family:var(--display);font-weight:400;font-size:clamp(15px,1.5vw,19px);line-height:1.3;letter-spacing:.01em;
+  opacity:0;transition:opacity .35s ease;pointer-events:none;text-wrap:balance}
+.m-item.active .m-name{opacity:1}
+
+/* ---------- selected work: expandable project cards ---------- */
+.acc-list{display:flex;flex-direction:column;border-top:1px solid var(--line-soft)}
+.acc{border-bottom:1px solid var(--line-soft)}
+.acc-head{width:100%;background:none;border:none;cursor:pointer;text-align:left;color:inherit;font:inherit;
+  display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,36px);align-items:center;
+  padding:clamp(22px,3vw,34px) 2px}
+.acc-thumb{width:clamp(82px,12vw,132px);aspect-ratio:1/1;border-radius:11px;overflow:hidden;
+  border:1px solid var(--line);background:var(--bg-3);flex:none}
+.acc-thumb img{width:100%;height:100%;object-fit:cover;filter:saturate(.92);transition:transform .6s cubic-bezier(.16,1,.3,1),filter .4s}
+.acc-head:hover .acc-thumb img{transform:scale(1.05);filter:saturate(1)}
+.acc-sum{display:flex;flex-direction:column;gap:7px;min-width:0}
+.acc-sum .pnum{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.acc-sum .ptitle{font-family:var(--display);font-weight:600;font-size:clamp(22px,3.1vw,34px);letter-spacing:-.02em;line-height:1.08;color:var(--ink)}
+.acc-sum .pmeta{font-size:13px;color:var(--accent);letter-spacing:.02em}
+.acc-sum .plede{font-size:14.5px;color:var(--muted);font-weight:300;text-wrap:pretty;margin-top:3px}
+.acc-sum .ptags{display:flex;flex-wrap:wrap;gap:8px;margin-top:7px}
+.acc-sum .ptags span{font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 12px;letter-spacing:.01em}
+@media(max-width:640px){.acc-sum .plede,.acc-sum .ptags{display:none}}
+.acc-ico{position:relative;width:22px;height:22px;flex:none;align-self:start;margin-top:6px}
+.acc-ico::before,.acc-ico::after{content:"";position:absolute;top:50%;left:50%;background:var(--ink);
+  transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .3s}
+.acc-ico::before{width:16px;height:1.5px;transform:translate(-50%,-50%)}
+.acc-ico::after{width:1.5px;height:16px;transform:translate(-50%,-50%)}
+.acc.open .acc-ico::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.16,1,.3,1)}
+.acc.open .acc-panel{grid-template-rows:1fr}
+.acc-panel>.acc-inner{overflow:hidden;min-height:0}
+.acc.open .acc-inner{padding:clamp(4px,1vw,12px) 2px clamp(22px,3vw,40px)}
+.no-js .acc-panel{grid-template-rows:1fr}
+.no-js .acc-inner{padding:4px 2px clamp(22px,3vw,40px)}
+
+.case{display:grid;grid-template-columns:1fr;gap:clamp(16px,3vw,44px);padding-block:clamp(26px,3.5vw,40px)}
+.case+.case{border-top:1px solid var(--line-soft)}
+@media(min-width:880px){.case{grid-template-columns:minmax(220px,300px) 1fr}}
+.case .meta .tag2{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.case .meta h4{font-family:var(--display);font-size:clamp(19px,2.3vw,25px);font-weight:600;line-height:1.18;margin-top:10px;letter-spacing:-.015em}
+.case .meta .award{display:inline-flex;align-items:center;gap:9px;margin-top:15px;font-size:12.5px;color:var(--ink);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.case .meta .award .gem{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.psr{display:flex;flex-direction:column;gap:17px}
+.psr .row{display:grid;grid-template-columns:80px 1fr;gap:20px;align-items:baseline}
+.psr .row .lab{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);padding-top:2px}
+.psr .row p{font-size:15.5px;color:var(--ink);font-weight:300;line-height:1.7;text-wrap:pretty}
+.psr .row p b{font-weight:500;color:var(--ink)}
+.psr .row.result p b{color:var(--accent)}
+@media(max-width:540px){.psr .row{grid-template-columns:1fr;gap:6px}}
+
+.shots{margin-top:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.shots:empty{display:none}
+.shot{margin:0;border:1px solid var(--line-soft);border-radius:9px;overflow:hidden;background:var(--bg-2)}
+.shot img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:var(--bg-3);filter:saturate(.92);transition:filter .4s,transform .5s cubic-bezier(.16,1,.3,1)}
+.shot:hover img{filter:saturate(1);transform:scale(1.03)}
+.shot figcaption{font-size:12px;color:var(--faint);padding:9px 12px;border-top:1px solid var(--line-soft);letter-spacing:.01em}
+
+/* ---------- skills ---------- */
+.skills .cols{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,56px)}
+@media(min-width:760px){.skills .cols{grid-template-columns:repeat(3,1fr)}}
+.skcol h3{font-family:var(--display);font-weight:500;font-size:14px;color:var(--accent);letter-spacing:.04em;
+  padding-bottom:16px;margin-bottom:6px;border-bottom:1px solid var(--line-soft)}
+.skcol ul{list-style:none;display:flex;flex-direction:column}
+.skcol li{font-size:15px;color:var(--ink);font-weight:300;padding:11px 0;border-bottom:1px solid var(--line-soft)}
+.skcol li:last-child{border-bottom:none}
+.skcol li span{color:var(--faint);font-size:13px}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--line-soft)}
+.foot .wrap{padding-block:clamp(40px,6vw,64px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px}
+.foot .nm{font-family:var(--display);font-weight:500;font-size:clamp(19px,2.4vw,24px);letter-spacing:-.01em}
+.foot .meta{font-size:13.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;font-weight:300}
+.foot .meta a{color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:1px;transition:border-color .3s}
+.foot .meta a:hover{border-color:var(--accent)}
+
+/* ---------- reveal motion ---------- */
+.r{opacity:1}
+.no-js .r{opacity:1!important;transform:none!important}
+html.js .r{opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+html.js .r.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html.js .r{opacity:1!important;transform:none!important}
+  .hero .hi span::after{right:0!important}
+  .lanyard{transform:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<a class="brandmark" href="#top"><span class="dot" aria-hidden="true"></span>YUWEN<span class="en">許又文</span></a>
+
+<div class="menu-wrap" id="menu">
+  <div class="sm-scrim" id="menuScrim" aria-hidden="true"></div>
+  <div class="sm-prelayers" aria-hidden="true">
+    <div class="sm-prelayer p1"></div>
+    <div class="sm-prelayer p2"></div>
+  </div>
+  <aside class="sm-panel" id="menuPanel" aria-hidden="true" aria-label="主選單">
+    <ul class="sm-list">
+      <li><a class="sm-link" href="#about"><span class="sm-num">01</span><span class="sm-label">關於我</span></a></li>
+      <li><a class="sm-link" href="#work"><span class="sm-num">02</span><span class="sm-label">專案經歷</span></a></li>
+      <li><a class="sm-link" href="#skills"><span class="sm-num">03</span><span class="sm-label">能力</span></a></li>
+    </ul>
+    <div class="sm-socials">
+      <h3>Contact</h3>
+      <a href="mailto:hil4924@gmail.com">hil4924@gmail.com</a>
+    </div>
+  </aside>
+  <button class="sm-toggle" id="menuToggle" type="button" aria-label="開啟選單" aria-expanded="false" aria-controls="menuPanel">
+    <span class="sm-toggle-text" aria-hidden="true"><span class="sm-line">Menu</span><span class="sm-line">Close</span></span>
+    <span class="sm-icon" aria-hidden="true"><span class="h"></span><span class="v"></span></span>
+  </button>
+</div>
+
+<main id="top">
+
+  <section class="hero" id="hero" aria-label="簡介">
+    <canvas class="grainient" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <p class="eyebrow r">Product · Marketing</p>
+      <h1 class="hi">HI, I'm <span class="acc">YUWEN</span></h1>
+      <p class="hi-sub r">從用戶痛點出發，把模糊的想法，<br>做成<em>能被驗證的產品</em>。</p>
+
+      <div class="stage">
+        <aside class="desc left">
+          <div class="mrow"><span class="k">Education</span><span class="v">政大 創新國際學院<br>學士班 · 雙主修外交</span></div>
+          <div class="mrow"><span class="k">Based in</span><span class="v">Taipei, Taiwan</span></div>
+        </aside>
+
+        <div class="lanyard-col">
+          <div class="lanyard" id="lanyard">
+            <div class="string" aria-hidden="true"></div>
+            <div class="clip" aria-hidden="true"></div>
+            <div class="badge" id="badge" role="img" aria-label="許又文的識別證個人照">
+              <div class="photo"><img src="assets/profile.jpg" alt="許又文 Hsu Yu Wen 個人照"></div>
+              <div class="strip">
+                <div class="nm">許又文</div>
+                <div class="en">HSU YU-WEN</div>
+                <div class="div" aria-hidden="true"></div>
+                <div class="role">PM · Marketing</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="desc right">
+          <div class="mrow"><span class="k">Now</span><span class="v"><b>政大通 NCCUPass</b><br>第三代 PM</span></div>
+          <div class="mrow"><span class="k">Believe</span><span class="v">From user insight<br>to shipped product.</span></div>
+        </aside>
+      </div>
+
+      <div class="cta">
+        <a class="btn" href="#work">View selected work</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about" aria-label="關於我">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow r">About Me</p>
+        <h2 class="r">關於我</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-main">
+          <p class="manifesto r">沒有舞台，就<em>自己造一個</em>。</p>
+          <p class="bio r"><b class="bioline">政大創國 × 外交 × 廣電</b>個性開朗、有高社交能量，喜歡與人交流；<br>擅長觀察、發現問題，解決它。</p>
+          <p class="bio r">曾擔任政大通 NCCUPass 第三代 PM，帶領跨部門團隊推動產品開發、品牌建立與組織轉型；以校園大使身份執行微軟產品行銷專案；並參與企業合作，以管顧思維協助企業解決社會議題。</p>
+          <p class="htags r"><span>#洞察驅動</span><span>#從0到1</span><span>#以終為始</span></p>
+        </div>
+
+        <div class="about-marquee r" aria-hidden="true">
+          <div class="about-mtrack" id="aboutMarquee">
+            <figure class="amimg"><img src="assets/about-1.jpg" alt="" loading="lazy"></figure>
+            <figure class="amimg"><img src="assets/about-2.jpg" alt="" loading="lazy"></figure>
+            <figure class="amimg"><img src="assets/about-3.jpg" alt="" loading="lazy"></figure>
+            <figure class="amimg"><img src="assets/about-4.jpg" alt="" loading="lazy"></figure>
+            <figure class="amimg"><img src="assets/about-5.jpg" alt="" loading="lazy"></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="work" id="work" aria-label="精選專案">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow r">Selected Work</p>
+        <h2 class="r">精選專案</h2>
+      </div>
+
+      <!-- Masonry 拼貼牆（滿版、欄寬自動）。目前為各種比例的空白佔位格，等上傳圖片。
+           放圖＝在該格 style 加 background-image:url('assets/x.jpg')，並可加 <span class="m-name">名稱</span>（點擊反白浮現）。 -->
+      <div class="masonry" id="masonry">
+        <div class="m-item" style="--ar:1.25"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:.72"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:1.0"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:1.45"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:.62"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:1.15"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:.85"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:1.3"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:.95"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:.7"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:1.2"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:1.0"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:.58"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:1.35"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:.9"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:1.1"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:.8"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:1.25"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:.68"><span class="m-fill"></span></div>
+        <div class="m-item" style="--ar:1.05"><span class="m-fill"></span></div>
+      </div>
+
+      <div class="acc-list">
+
+        <!-- 專案一 -->
+        <div class="acc r" id="p-nccupass">
+          <button class="acc-head" type="button" aria-expanded="false" aria-controls="pan-nccupass">
+            <span class="acc-thumb"><img src="assets/nccupass-team.jpg" alt="政大通 NCCUPass 團隊合照" loading="lazy"></span>
+            <span class="acc-sum">
+              <span class="pnum">專案一 · 校園生活 App</span>
+              <span class="ptitle">政大通 NCCUPass</span>
+              <span class="pmeta">第三代 PM　·　2025.08 – 2026.08</span>
+              <span class="plede">從產品開發、品牌建立到組織轉型，帶領校園新創團隊進化。</span>
+              <span class="ptags"><span>產品管理</span><span>品牌策略</span><span>組織管理</span><span>用戶研究</span></span>
+            </span>
+            <span class="acc-ico" aria-hidden="true"></span>
+          </button>
+          <div class="acc-panel" id="pan-nccupass" role="region" aria-label="政大通 NCCUPass 詳細">
+            <div class="acc-inner">
+              <article class="case">
+                <div class="meta">
+                  <div class="tag2">重點一 · 產品開發</div>
+                  <h4>FoundPass　AI 失物招領</h4>
+                  <span class="award"><span class="gem" aria-hidden="true"></span>AI 跨域永續競賽季軍 · 數創大賞佳作</span>
+                </div>
+                <div class="psr">
+                  <div class="row"><div class="lab">問題</div><p>校園失物資訊零散，學生只能靠臉書社團發文碰運氣，各處室招領區物品大量囤積無人認領，來回奔波仍找不回。</p></div>
+                  <div class="row"><div class="lab">洞察</div><p>兩個核心痛點：校園缺乏整合平台、各處室管理方式不一；學生遺失後沒有主動通知機制，資訊嚴重不流通。</p></div>
+                  <div class="row"><div class="lab">解法</div><p>打造 App 全新功能，結合 <b>AI 影像辨識</b>：學生刊登遺失物後，系統自動比對、通知失主到招領區取回，從被動碰運氣變成主動配對，也減少重複購買與浪費。我負責推動專案、協調跨部門溝通、競賽簡報與發表。</p></div>
+                  <div class="row result"><div class="lab">成果</div><p>拿下 <b>AI 跨域永續競賽季軍</b> 與 <b>數創大賞佳作</b>，完成前後端開發，正與學校洽談合作上架。</p></div>
+                  <div class="shots">
+                    <figure class="shot"><img src="assets/foundpass-app.png" alt="FoundPass 失物招領 App 介面" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>FoundPass App 介面</figcaption></figure>
+                    <figure class="shot"><img src="assets/foundpass-award.jpg" alt="政大 AI 跨域永續創新競賽季軍合照" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>競賽季軍</figcaption></figure>
+                    <figure class="shot"><img src="assets/foundpass-award2.jpg" alt="2025 臺灣數創大賞 數位+組 佳作" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>數創大賞佳作</figcaption></figure>
+                  </div>
+                </div>
+              </article>
+
+              <article class="case">
+                <div class="meta">
+                  <div class="tag2">重點二 · 產品孵化</div>
+                  <h4>CompetitionPass　競賽孵化器</h4>
+                  <span class="award"><span class="gem" aria-hidden="true"></span>獲政大校內 AI 跨域補助計畫</span>
+                </div>
+                <div class="psr">
+                  <div class="row"><div class="lab">問題</div><p>大學生參賽缺乏即時反饋，企劃書盲點只能靠隊友互看，或等到評審當天才知道輸在哪。</p></div>
+                  <div class="row"><div class="lab">研究</div><p>訪談 1 位競賽評審摸清致命盲點、2 位資深參賽者掌握真實痛點，作為 AI 評分框架與提示詞設計的核心依據。</p></div>
+                  <div class="row"><div class="lab">解法</div><p>定義產品規格：上傳企劃書 PDF → AI 產出<b>五維雷達圖</b>（市場、創新、商模、可行性、邏輯）→ 創投／PM／行銷總監多角色點評 → 一鍵複製改善建議。我負責功能描述、UI/UX 規格、API 定義、驗收標準與 User Flow。</p></div>
+                  <div class="row result"><div class="lab">成果</div><p>初版上線後用戶測試發現：學生不信任 AI 評分、認為沒比一般 AI 準。<b>這個洞察讓團隊及時轉向</b>，改開發更貼近需求的新功能——在資源有限下快速驗證假設、用真實回饋做決策。</p></div>
+                  <div class="shots">
+                    <figure class="shot"><img src="assets/competitionpass-radar.png" alt="CompetitionPass 產品介面：五維雷達圖與多角色點評" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>五維雷達圖介面</figcaption></figure>
+                    <figure class="shot"><img src="assets/competitionpass-poster.png" alt="競賽孵化器 CompetitionPass 專案海報" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>專案海報</figcaption></figure>
+                  </div>
+                </div>
+              </article>
+
+              <article class="case">
+                <div class="meta">
+                  <div class="tag2">重點三 · 品牌與組織</div>
+                  <h4>品牌建立與組織優化</h4>
+                </div>
+                <div class="psr">
+                  <div class="row"><div class="lab">品牌</div><p>政大通非學校社團，外界難快速理解定位。我獨立製作<b>品牌書</b>，把創辦初衷、里程碑、功能整合成視覺化簡報——之後促成與政大創聯會（短影音互宣，一支獲顯著成效）、政大藝術季（線下活動整合 App 功能）的合作。</p></div>
+                  <div class="row"><div class="lab">組織</div><p>組織缺固定活動、新成員適應難。透過 <b>1on1</b> 收集回饋、規劃整學期活動，並新增「創辦人時間」，補上成員與創辦人的連結。</p></div>
+                  <div class="row"><div class="lab">流程</div><p>招新與籌備靠人工往返、SOP 口頭傳承。串接 AI 工具 + <b>Google Apps Script</b> 自動化招新流程、建立 SOP、導入 <b>OKR</b> 追蹤。</p></div>
+                  <div class="row result"><div class="lab">成果</div><p>「創辦人時間」<b>參與率 95%、滿意度 4.9/5</b>，92% 成員期待持續辦理；招新流程縮短至 <b>2 個工作日</b>、籌備降至 1 次會議，活動參與度均達 90%、滿意度均 4.5/5 以上。</p></div>
+                  <div class="shots">
+                    <figure class="shot"><img src="assets/brandbook.png" alt="政大通 NCCU PASS Brand Book 品牌書封面" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>政大通 Brand Book</figcaption></figure>
+                    <figure class="shot"><img src="assets/team-event.jpg" alt="政大通「創辦人時間」線上組織活動合照" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>創辦人時間</figcaption></figure>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 專案二 -->
+        <div class="acc r" id="p-copilot">
+          <button class="acc-head" type="button" aria-expanded="false" aria-controls="pan-copilot">
+            <span class="acc-thumb"><img src="assets/copilot-booth.jpg" alt="Copilot 解憂站活動攤位合照" loading="lazy"></span>
+            <span class="acc-sum">
+              <span class="pnum">專案二 · 微軟校園大使</span>
+              <span class="ptitle">Copilot 解憂站</span>
+              <span class="pmeta">組長 · 產品行銷　·　2026.05</span>
+              <span class="plede">用「解籤解憂」的互動體驗，讓學生主動完成第一次 Copilot 對話。</span>
+              <span class="ptags"><span>產品行銷</span><span>活動企劃</span><span>跨組織合作</span></span>
+            </span>
+            <span class="acc-ico" aria-hidden="true"></span>
+          </button>
+          <div class="acc-panel" id="pan-copilot" role="region" aria-label="Copilot 解憂站 詳細">
+            <div class="acc-inner">
+              <div class="psr">
+                <div class="row"><div class="lab">問題</div><p>大學生對微軟 Copilot 教育版認知度低。如何在校園場景中讓學生<b>主動嘗試</b>，而不是被動接收資訊？</p></div>
+                <div class="row"><div class="lab">洞察</div><p>直接推廣 AI 工具讓人有距離感；但包裝成「解決生活煩惱」的互動體驗，學生的參與意願會完全不同。</p></div>
+                <div class="row"><div class="lab">策略</div><p>① <b>AI Agent 解籤體驗</b>——抽籤、把籤號與煩惱輸入 Copilot Agent 得到個人化解籤，把工具變成有儀式感的日常；② 與<b>政大通合作擲筊挑戰</b>，跨組織互相導流；③ <b>游擊戰</b>主動走進人流邀請學生，把被動等待轉為主動攔截。</p></div>
+                <div class="row"><div class="lab">我的角色</div><p>組長：整體專案管理與時程、撰寫完整企劃書（流程／場地／道具／人力 SOP）、規劃並主導三大策略、串接政大通資源設計跨組織合作、負責提案與成果發表。</p></div>
+                <div class="row result"><div class="lab">成果</div><p>六小時觸及近 <b>200 位學生</b>、收集 <b>110 份有效表單（全場第二）</b>、獲<b>競賽第二名</b>，並成功串聯微軟 × 政大通跨組織合作。</p></div>
+                <div class="shots">
+                  <figure class="shot"><img src="assets/copilot-booth.jpg" alt="Copilot 解憂站微軟校園大使活動攤位團隊合照" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>解憂站攤位</figcaption></figure>
+                  <figure class="shot"><img src="assets/copilot-engage.jpg" alt="現場一對一引導學生體驗 Copilot 解籤" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>一對一引導</figcaption></figure>
+                  <figure class="shot"><img src="assets/copilot-crowd.jpg" alt="學生圍在攤位前實際操作 Copilot" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>現場人潮</figcaption></figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 專案三 -->
+        <div class="acc r" id="p-pangu">
+          <button class="acc-head" type="button" aria-expanded="false" aria-controls="pan-pangu">
+            <span class="acc-thumb"><img src="assets/pangu-workshop.jpg" alt="盤古銀髮失智 VR 工作坊現場" loading="lazy"></span>
+            <span class="acc-sum">
+              <span class="pnum">專案三 · 企業顧問專案</span>
+              <span class="ptitle">盤古銀髮 × 社區藥局</span>
+              <span class="pmeta">小組長 · 資訊種子 TUV　·　2024.09 – 2024.12</span>
+              <span class="plede">用管顧思維，把目標客群從一般民眾，重新定位成社區藥局。</span>
+              <span class="ptags"><span>顧問思維</span><span>用戶研究</span><span>市場重新定位</span><span>Prototype 設計</span></span>
+            </span>
+            <span class="acc-ico" aria-hidden="true"></span>
+          </button>
+          <div class="acc-panel" id="pan-pangu" role="region" aria-label="盤古銀髮 × 社區藥局 詳細">
+            <div class="acc-inner">
+              <div class="psr">
+                <div class="row"><div class="lab">問題</div><p>盤古銀髮的失智症 VR 工作坊知名度低、難觸及社區民眾，現有推廣模式缺乏落地渠道。</p></div>
+                <div class="row"><div class="lab">研究</div><p>發想前先做<b>產業研究</b>，看到四個趨勢：藥局走向集團化、頭部連鎖（如丁丁）推長照示範店、藥局已有跨域合作經驗、失智友善契合 ESG 與企業社會責任。</p></div>
+                <div class="row"><div class="lab">策略</div><p>據此把目標客群從一般民眾<b>重新定位為社區藥局</b>，以「藥局 × 盤古銀髮」合辦半日工作坊為解方：民眾在失智體驗中建立對藥局的信任，藥局也強化社區形象，創造雙贏。</p></div>
+                <div class="row"><div class="lab">我的角色</div><p>小組長：與企業接洽、主持會議、分配任務與追蹤進度；帶組員用<b>議題樹</b>拆解問題、<b>5W2H</b> 規劃解方；規劃訪綱、執行質性訪談；撰寫 Prototype 企劃書與半日工作坊流程。</p></div>
+                <div class="row result"><div class="lab">成果</div><p>活動滿意度 <b>8.8/10</b>、好感度 95%、民眾再訪藥局意願 90%、信任度較前測<b>提升 32%</b>；質性訪談顯示 VR 體驗有效提升失智症認知與品牌好感。</p></div>
+                <div class="shots">
+                  <figure class="shot"><img src="assets/pangu-workshop.jpg" alt="民眾配戴 VR 裝置參與失智症體驗工作坊" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>失智 VR 工作坊</figcaption></figure>
+                  <figure class="shot"><img src="assets/pangu-pitch.jpg" alt="團隊與盤古銀髮業主提案成果合照" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>與業主提案</figcaption></figure>
+                  <figure class="shot"><img src="assets/pangu-field.jpg" alt="社區實地田野訪查合照" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>社區田野訪查</figcaption></figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="skills" id="skills" aria-label="技能">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow r">Skills &amp; Tools</p>
+        <h2 class="r">我帶得走的能力</h2>
+        <span class="sline r">在三個專案的實戰裡長出來的，不是課本上的。</span>
+      </div>
+      <div class="cols">
+        <div class="skcol r">
+          <h3>產品管理</h3>
+          <ul>
+            <li>用戶訪談與需求洞察</li>
+            <li>敏捷開發 · 迭代規劃</li>
+            <li>跨部門溝通 <span>（工程／設計）</span></li>
+            <li>產品文件 <span>（規格 · User Flow · 驗收標準）</span></li>
+            <li>RAG 應用 · Vibe Coding</li>
+          </ul>
+        </div>
+        <div class="skcol r">
+          <h3>策略與顧問</h3>
+          <ul>
+            <li>議題樹 · 5W2H 問題拆解</li>
+            <li>產業研究 · 市場重新定位</li>
+            <li>品牌策略 · Brand Book</li>
+            <li>OKR · 數據化決策</li>
+            <li>活動企劃 · 跨組織合作</li>
+          </ul>
+        </div>
+        <div class="skcol r">
+          <h3>工具</h3>
+          <ul>
+            <li>Figma</li>
+            <li>Google Apps Script <span>（自動化）</span></li>
+            <li>Notion</li>
+            <li>GPT · AI Agent 協作</li>
+            <li>Canva</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="nm">許又文 · Hsu Yu Wen</div>
+    <div class="meta">
+      <a href="mailto:hil4924@gmail.com">hil4924@gmail.com</a>
+      <span>Taipei, Taiwan</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.remove('no-js');
+  document.documentElement.classList.add('js');
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- hero headline reveal trigger ---- */
+  const hero = document.getElementById('hero');
+  requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add('in')));
+
+  /* ---- hero title: per-character blur-in (BlurText style) ---- */
+  (function () {
+    const h1 = document.querySelector('.hero .hi');
+    if (!h1 || reduce) return;
+    const segs = [{ t: "HI, I'm ", acc: false }, { t: 'YUWEN', acc: true }];
+    let html = '', i = 0;
+    segs.forEach((s) => {
+      for (const ch of s.t) {
+        const c = ch === ' ' ? ' ' : ch;
+        html += '<span class="bch' + (s.acc ? ' acc' : '') + '" style="animation-delay:' + (i * 0.045).toFixed(3) + 's">' + c + '</span>';
+        i++;
+      }
+    });
+    h1.innerHTML = html;
+  })();
+
+  /* ---- about: vertical photo marquee (duplicate set for seamless loop) ---- */
+  (function () {
+    const track = document.getElementById('aboutMarquee');
+    if (!track) return;
+    const items = [...track.children];
+    items.forEach((el) => track.appendChild(el.cloneNode(true)));
+  })();
+
+  /* ---- staggered side menu ---- */
+  (function () {
+    const menu = document.getElementById('menu');
+    const toggle = document.getElementById('menuToggle');
+    const panel = document.getElementById('menuPanel');
+    const scrim = document.getElementById('menuScrim');
+    if (!menu || !toggle) return;
+    function setOpen(o) {
+      menu.classList.toggle('open', o);
+      toggle.setAttribute('aria-expanded', String(o));
+      toggle.setAttribute('aria-label', o ? '關閉選單' : '開啟選單');
+      if (panel) panel.setAttribute('aria-hidden', String(!o));
+      document.body.classList.toggle('menu-open', o);
+    }
+    toggle.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
+    if (scrim) scrim.addEventListener('click', () => setOpen(false));
+    menu.querySelectorAll('.sm-link').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  })();
+
+  /* ---- hero background: animated grainy gradient (Grainient, vanilla WebGL2) ---- */
+  (function () {
+    const canvas = document.querySelector('.hero .grainient');
+    if (!canvas) return;
+    const gl = canvas.getContext('webgl2', { alpha: true, antialias: false, premultipliedAlpha: false });
+    if (!gl) { canvas.style.display = 'none'; return; }
+
+    const vsSrc = `#version 300 es
+in vec2 position;
+void main(){ gl_Position = vec4(position, 0.0, 1.0); }`;
+    const fsSrc = `#version 300 es
+precision highp float;
+uniform vec2 iResolution; uniform float iTime;
+uniform float uTimeSpeed; uniform float uColorBalance; uniform float uWarpStrength;
+uniform float uWarpFrequency; uniform float uWarpSpeed; uniform float uWarpAmplitude;
+uniform float uBlendAngle; uniform float uBlendSoftness; uniform float uRotationAmount;
+uniform float uNoiseScale; uniform float uGrainAmount; uniform float uGrainScale;
+uniform float uGrainAnimated; uniform float uContrast; uniform float uGamma;
+uniform float uSaturation; uniform vec2 uCenterOffset; uniform float uZoom;
+uniform vec3 uColor1; uniform vec3 uColor2; uniform vec3 uColor3;
+out vec4 fragColor;
+#define S(a,b,t) smoothstep(a,b,t)
+mat2 Rot(float a){float s=sin(a),c=cos(a);return mat2(c,-s,s,c);}
+vec2 hash(vec2 p){p=vec2(dot(p,vec2(2127.1,81.17)),dot(p,vec2(1269.5,283.37)));return fract(sin(p)*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.0-2.0*f);float n=mix(mix(dot(-1.0+2.0*hash(i+vec2(0.0,0.0)),f-vec2(0.0,0.0)),dot(-1.0+2.0*hash(i+vec2(1.0,0.0)),f-vec2(1.0,0.0)),u.x),mix(dot(-1.0+2.0*hash(i+vec2(0.0,1.0)),f-vec2(0.0,1.0)),dot(-1.0+2.0*hash(i+vec2(1.0,1.0)),f-vec2(1.0,1.0)),u.x),u.y);return 0.5+0.5*n;}
+void mainImage(out vec4 o, vec2 C){
+  float t=iTime*uTimeSpeed;
+  vec2 uv=C/iResolution.xy;
+  float ratio=iResolution.x/iResolution.y;
+  vec2 tuv=uv-0.5+uCenterOffset;
+  tuv/=max(uZoom,0.001);
+  float degree=noise(vec2(t*0.1,tuv.x*tuv.y)*uNoiseScale);
+  tuv.y*=1.0/ratio;
+  tuv*=Rot(radians((degree-0.5)*uRotationAmount+180.0));
+  tuv.y*=ratio;
+  float frequency=uWarpFrequency;
+  float ws=max(uWarpStrength,0.001);
+  float amplitude=uWarpAmplitude/ws;
+  float warpTime=t*uWarpSpeed;
+  tuv.x+=sin(tuv.y*frequency+warpTime)/amplitude;
+  tuv.y+=sin(tuv.x*(frequency*1.5)+warpTime)/(amplitude*0.5);
+  vec3 colLav=uColor1; vec3 colOrg=uColor2; vec3 colDark=uColor3;
+  float b=uColorBalance; float s=max(uBlendSoftness,0.0);
+  mat2 blendRot=Rot(radians(uBlendAngle));
+  float blendX=(tuv*blendRot).x;
+  float edge0=-0.3-b-s; float edge1=0.2-b+s;
+  float v0=0.5-b+s; float v1=-0.3-b-s;
+  vec3 layer1=mix(colDark,colOrg,S(edge0,edge1,blendX));
+  vec3 layer2=mix(colOrg,colLav,S(edge0,edge1,blendX));
+  vec3 col=mix(layer1,layer2,S(v0,v1,tuv.y));
+  vec2 grainUv=uv*max(uGrainScale,0.001);
+  if(uGrainAnimated>0.5){grainUv+=vec2(iTime*0.05);}
+  float grain=fract(sin(dot(grainUv,vec2(12.9898,78.233)))*43758.5453);
+  col+=(grain-0.5)*uGrainAmount;
+  col=(col-0.5)*uContrast+0.5;
+  float luma=dot(col,vec3(0.2126,0.7152,0.0722));
+  col=mix(vec3(luma),col,uSaturation);
+  col=pow(max(col,0.0),vec3(1.0/max(uGamma,0.001)));
+  col=clamp(col,0.0,1.0);
+  o=vec4(col,1.0);
+}
+void main(){ vec4 o=vec4(0.0); mainImage(o,gl_FragCoord.xy); fragColor=o; }`;
+
+    function compile(type, src) {
+      const sh = gl.createShader(type); gl.shaderSource(sh, src); gl.compileShader(sh);
+      if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(sh)); }
+      return sh;
+    }
+    const prog = gl.createProgram();
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER, vsSrc));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fsSrc));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { console.warn(gl.getProgramInfoLog(prog)); canvas.style.display = 'none'; return; }
+    gl.useProgram(prog);
+
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const ploc = gl.getAttribLocation(prog, 'position');
+    gl.enableVertexAttribArray(ploc);
+    gl.vertexAttribPointer(ploc, 2, gl.FLOAT, false, 0, 0);
+
+    const U = (n) => gl.getUniformLocation(prog, n);
+    const uRes = U('iResolution'), uTime = U('iTime');
+    const hex = (h) => { const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h); return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [1, 1, 1]; };
+
+    // tuned for soft, light, premium feel
+    gl.uniform1f(U('uTimeSpeed'), 0.16);
+    gl.uniform1f(U('uColorBalance'), 0.0);
+    gl.uniform1f(U('uWarpStrength'), 1.0);
+    gl.uniform1f(U('uWarpFrequency'), 4.0);
+    gl.uniform1f(U('uWarpSpeed'), 1.3);
+    gl.uniform1f(U('uWarpAmplitude'), 72.0);
+    gl.uniform1f(U('uBlendAngle'), 20.0);
+    gl.uniform1f(U('uBlendSoftness'), 0.18);
+    gl.uniform1f(U('uRotationAmount'), 240.0);
+    gl.uniform1f(U('uNoiseScale'), 1.6);
+    gl.uniform1f(U('uGrainAmount'), 0.08);
+    gl.uniform1f(U('uGrainScale'), 1.7);
+    gl.uniform1f(U('uGrainAnimated'), 1.0);
+    gl.uniform1f(U('uContrast'), 1.24);
+    gl.uniform1f(U('uGamma'), 1.0);
+    gl.uniform1f(U('uSaturation'), 1.08);
+    gl.uniform2f(U('uCenterOffset'), 0.0, 0.0);
+    gl.uniform1f(U('uZoom'), 1.0);
+    gl.uniform3fv(U('uColor1'), hex('#f1ddc4')); // warm sand-ivory
+    gl.uniform3fv(U('uColor2'), hex('#c3cedd')); // cool soft blue-grey
+    gl.uniform3fv(U('uColor3'), hex('#d0ad88')); // clay / deeper sand
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    function resize() {
+      const r = canvas.getBoundingClientRect();
+      const w = Math.max(1, Math.floor(r.width * dpr)), h = Math.max(1, Math.floor(r.height * dpr));
+      if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(resize).observe(canvas);
+    else window.addEventListener('resize', resize);
+    resize();
+
+    let raf = 0, t0 = performance.now(), visible = true, pageVis = !document.hidden;
+    function frame(t) { gl.uniform1f(uTime, (t - t0) * 0.001); gl.drawArrays(gl.TRIANGLES, 0, 3); raf = requestAnimationFrame(frame); }
+    function start() { if (visible && pageVis && !reduce && raf === 0) raf = requestAnimationFrame(frame); }
+    function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+    if (reduce) {
+      gl.uniform1f(uTime, 6.0); gl.drawArrays(gl.TRIANGLES, 0, 3); // single static frame
+    } else {
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? start() : stop(); }, { threshold: 0 }).observe(canvas);
+      }
+      document.addEventListener('visibilitychange', () => { pageVis = !document.hidden; pageVis ? start() : stop(); });
+      start();
+    }
+  })();
+
+  /* ---- scroll reveal (content visible by default; enhance only) ---- */
+  const items = [...document.querySelectorAll('.r')];
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((es) => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: .12, rootMargin: '0px 0px -8% 0px' });
+    items.forEach(el => io.observe(el));
+    setTimeout(() => items.forEach(el => el.classList.add('in')), 1600);
+  }
+
+  /* ---- lanyard: drop on load, then draggable pendulum ---- */
+  (function () {
+    const lan = document.getElementById('lanyard');
+    if (!lan) return;
+    const badge = document.getElementById('badge');
+    if (reduce) return;
+
+    lan.addEventListener('animationend', (e) => {
+      if (e.animationName === 'drop') lan.classList.add('swaying');
+    });
+
+    let dragging = false, angle = 0, vel = 0, raf = null, last = 0;
+    const MAXA = 1.15;
+
+    function pivot() {
+      const host = lan.parentElement || lan;
+      const r = host.getBoundingClientRect();
+      const lr = lan.getBoundingClientRect();
+      return { x: r.left + r.width / 2, y: Math.min(lr.top, r.top) + 4 };
+    }
+    function apply() { lan.style.transform = 'rotate(' + (angle * 180 / Math.PI) + 'deg)'; }
+    function settle(ts) {
+      if (!last) last = ts;
+      let dt = Math.min((ts - last) / 1000, 0.05); last = ts;
+      const acc = -14 * Math.sin(angle) - 2.4 * vel;
+      vel += acc * dt; angle += vel * dt;
+      apply();
+      if (Math.abs(angle) > 0.002 || Math.abs(vel) > 0.002) {
+        raf = requestAnimationFrame(settle);
+      } else {
+        angle = 0; vel = 0; lan.style.transform = ''; raf = null;
+        lan.classList.remove('dragging'); lan.classList.add('swaying');
+      }
+    }
+    function onDown(e) {
+      dragging = true;
+      lan.classList.add('dragging'); lan.classList.remove('swaying');
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      last = 0; vel = 0;
+      if (badge.setPointerCapture && e.pointerId != null) { try { badge.setPointerCapture(e.pointerId); } catch (_) {} }
+      onMove(e);
+    }
+    function onMove(e) {
+      if (!dragging) return;
+      const p = pivot();
+      const a = Math.atan2(e.clientX - p.x, e.clientY - p.y);
+      angle = Math.max(-MAXA, Math.min(MAXA, a));
+      apply(); e.preventDefault();
+    }
+    function onUp() {
+      if (!dragging) return;
+      dragging = false; last = 0;
+      raf = requestAnimationFrame(settle);
+    }
+    badge.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointermove', onMove, { passive: false });
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+  })();
+
+  /* ---- selected work: click to expand project cards (single-open accordion) ---- */
+  (function () {
+    const accs = [...document.querySelectorAll('.acc')];
+    if (!accs.length) return;
+    accs.forEach((acc) => {
+      const head = acc.querySelector('.acc-head');
+      if (!head) return;
+      head.addEventListener('click', () => {
+        const willOpen = !acc.classList.contains('open');
+        accs.forEach((a) => {
+          if (a !== acc) {
+            a.classList.remove('open');
+            const h = a.querySelector('.acc-head');
+            if (h) h.setAttribute('aria-expanded', 'false');
+          }
+        });
+        acc.classList.toggle('open', willOpen);
+        head.setAttribute('aria-expanded', String(willOpen));
+      });
+    });
+  })();
+
+  /* ---- selected work: masonry — click a tile to reveal its name (single-active) ---- */
+  (function () {
+    const grid = document.getElementById('masonry');
+    if (!grid) return;
+    const items = [...grid.querySelectorAll('.m-item')];
+    items.forEach((it) => {
+      if (!it.querySelector('.m-name')) return; // blank placeholder tiles aren't interactive yet
+      it.addEventListener('click', () => {
+        const on = it.classList.contains('active');
+        items.forEach((o) => o.classList.remove('active'));
+        if (!on) it.classList.add('active');
+      });
+    });
+  })();
+</script>
+</body>
+</html>

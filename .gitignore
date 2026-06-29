@@ -1,0 +1,24 @@
+# 原始大圖備份（50M，不上傳，只留本機）
+assets/_原始圖備份/
+
+# 建置輸出（網站直接從根目錄的 index.html 提供，dist 不需要）
+dist/
+
+# 早期樣板 / 草稿
+mockups/
+
+# 內部規劃筆記（不放上公開 repo；本機 OneDrive 已備份）
+PROJECT.md
+PRODUCT.md
+DESIGN.md
+專案01_政大通NCCUPass.md
+assets/圖片放這裡_清單.md
+
+# Claude Code 工具設定（不屬於網站內容）
+.claude/
+
+# 系統與編輯器
+.DS_Store
+Thumbs.db
+node_modules/
+.vercel/
