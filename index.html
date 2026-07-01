@@ -293,6 +293,18 @@ section{padding-block:clamp(64px,9vw,128px);position:relative}
 .shot:hover img{filter:saturate(1);transform:scale(1.03)}
 .shot figcaption{font-size:12px;color:var(--faint);padding:9px 12px;border-top:1px solid var(--line-soft);letter-spacing:.01em}
 
+/* ---------- case galleries: circular (WebGL, ported from reactbits) ---------- */
+.cgal{position:relative;width:100%;height:clamp(300px,40vw,430px);margin-top:16px;
+  border-radius:12px;overflow:hidden;cursor:grab;outline:none;
+  touch-action:pan-y;                 /* 直向仍可捲頁，橫向拖曳給畫廊 */
+  background:radial-gradient(120% 130% at 50% -10%,var(--bg-2),var(--bg-3));
+  border:1px solid var(--line-soft)}
+.cgal.dragging{cursor:grabbing}
+.cgal:focus-visible{box-shadow:0 0 0 2px var(--accent)}
+.cgal canvas{display:block;width:100%;height:100%}
+.cgal-item{display:none}               /* 純資料載體：data-src / data-text */
+@media(max-width:640px){.cgal{height:clamp(260px,64vw,340px)}}
+
 /* ---------- skills ---------- */
 .skills .cols{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,56px)}
 @media(min-width:760px){.skills .cols{grid-template-columns:repeat(3,1fr)}}
@@ -474,10 +486,14 @@ html.js .r.in{opacity:1;transform:none}
                   <div class="row"><div class="lab">洞察</div><p>兩個核心痛點：校園缺乏整合平台、各處室管理方式不一；學生遺失後沒有主動通知機制，資訊嚴重不流通。</p></div>
                   <div class="row"><div class="lab">解法</div><p>打造 App 全新功能，結合 <b>AI 影像辨識</b>：學生刊登遺失物後，系統自動比對、通知失主到招領區取回，從被動碰運氣變成主動配對，也減少重複購買與浪費。我負責推動專案、協調跨部門溝通、競賽簡報與發表。</p></div>
                   <div class="row result"><div class="lab">成果</div><p>拿下 <b>AI 跨域永續競賽季軍</b> 與 <b>數創大賞佳作</b>，完成前後端開發，正與學校洽談合作上架。</p></div>
-                  <div class="shots">
-                    <figure class="shot"><img src="assets/foundpass-app.png" alt="FoundPass 失物招領 App 介面" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>FoundPass App 介面</figcaption></figure>
-                    <figure class="shot"><img src="assets/foundpass-award.jpg" alt="政大 AI 跨域永續創新競賽季軍合照" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>競賽季軍</figcaption></figure>
-                    <figure class="shot"><img src="assets/foundpass-award2.jpg" alt="2025 臺灣數創大賞 數位+組 佳作" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>數創大賞佳作</figcaption></figure>
+                  <!-- FoundPass 照片輪播（5 格）。補圖：把 data-src 換成圖片路徑、data-text 填圖說即可。
+                       現成可用：foundpass-app.png / foundpass-award.jpg / foundpass-award2.jpg -->
+                  <div class="cgal" data-cgal="foundpass" data-bend="2.2" tabindex="0" role="region" aria-label="FoundPass 專案照片輪播">
+                    <span class="cgal-item" data-src="" data-text=""></span>
+                    <span class="cgal-item" data-src="" data-text=""></span>
+                    <span class="cgal-item" data-src="" data-text=""></span>
+                    <span class="cgal-item" data-src="" data-text=""></span>
+                    <span class="cgal-item" data-src="" data-text=""></span>
                   </div>
                 </div>
               </article>
@@ -493,9 +509,13 @@ html.js .r.in{opacity:1;transform:none}
                   <div class="row"><div class="lab">研究</div><p>訪談 1 位競賽評審摸清致命盲點、2 位資深參賽者掌握真實痛點，作為 AI 評分框架與提示詞設計的核心依據。</p></div>
                   <div class="row"><div class="lab">解法</div><p>定義產品規格：上傳企劃書 PDF → AI 產出<b>五維雷達圖</b>（市場、創新、商模、可行性、邏輯）→ 創投／PM／行銷總監多角色點評 → 一鍵複製改善建議。我負責功能描述、UI/UX 規格、API 定義、驗收標準與 User Flow。</p></div>
                   <div class="row result"><div class="lab">成果</div><p>初版上線後用戶測試發現：學生不信任 AI 評分、認為沒比一般 AI 準。<b>這個洞察讓團隊及時轉向</b>，改開發更貼近需求的新功能——在資源有限下快速驗證假設、用真實回饋做決策。</p></div>
-                  <div class="shots">
-                    <figure class="shot"><img src="assets/competitionpass-radar.png" alt="CompetitionPass 產品介面：五維雷達圖與多角色點評" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>五維雷達圖介面</figcaption></figure>
-                    <figure class="shot"><img src="assets/competitionpass-poster.png" alt="競賽孵化器 CompetitionPass 專案海報" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>專案海報</figcaption></figure>
+                  <!-- CompetitionPass 照片輪播（5 格）。現成可用：competitionpass-radar.png / competitionpass-poster.png -->
+                  <div class="cgal" data-cgal="competitionpass" data-bend="2.2" tabindex="0" role="region" aria-label="CompetitionPass 競賽孵化器 專案照片輪播">
+                    <span class="cgal-item" data-src="" data-text=""></span>
+                    <span class="cgal-item" data-src="" data-text=""></span>
+                    <span class="cgal-item" data-src="" data-text=""></span>
+                    <span class="cgal-item" data-src="" data-text=""></span>
+                    <span class="cgal-item" data-src="" data-text=""></span>
                   </div>
                 </div>
               </article>
@@ -510,9 +530,13 @@ html.js .r.in{opacity:1;transform:none}
                   <div class="row"><div class="lab">組織</div><p>組織缺固定活動、新成員適應難。透過 <b>1on1</b> 收集回饋、規劃整學期活動，並新增「創辦人時間」，補上成員與創辦人的連結。</p></div>
                   <div class="row"><div class="lab">流程</div><p>招新與籌備靠人工往返、SOP 口頭傳承。串接 AI 工具 + <b>Google Apps Script</b> 自動化招新流程、建立 SOP、導入 <b>OKR</b> 追蹤。</p></div>
                   <div class="row result"><div class="lab">成果</div><p>「創辦人時間」<b>參與率 95%、滿意度 4.9/5</b>，92% 成員期待持續辦理；招新流程縮短至 <b>2 個工作日</b>、籌備降至 1 次會議，活動參與度均達 90%、滿意度均 4.5/5 以上。</p></div>
-                  <div class="shots">
-                    <figure class="shot"><img src="assets/brandbook.png" alt="政大通 NCCU PASS Brand Book 品牌書封面" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>政大通 Brand Book</figcaption></figure>
-                    <figure class="shot"><img src="assets/team-event.jpg" alt="政大通「創辦人時間」線上組織活動合照" loading="lazy" onerror="this.closest('.shot').remove()"><figcaption>創辦人時間</figcaption></figure>
+                  <!-- 品牌與組織 照片輪播（5 格）。現成可用：brandbook.png / team-event.jpg -->
+                  <div class="cgal" data-cgal="brand" data-bend="2.2" tabindex="0" role="region" aria-label="品牌建立與組織優化 專案照片輪播">
+                    <span class="cgal-item" data-src="" data-text=""></span>
+                    <span class="cgal-item" data-src="" data-text=""></span>
+                    <span class="cgal-item" data-src="" data-text=""></span>
+                    <span class="cgal-item" data-src="" data-text=""></span>
+                    <span class="cgal-item" data-src="" data-text=""></span>
                   </div>
                 </div>
               </article>
@@ -939,6 +963,266 @@ void main(){ vec4 o=vec4(0.0); mainImage(o,gl_FragCoord.xy); fragColor=o; }`;
       });
     });
   })();
+</script>
+
+<!-- ===== 政大通三子案例 · CircularGallery 照片輪播（OGL WebGL，改寫自 reactbits） =====
+     空白版：每區 5 格佔位。補圖＝在上方對應的 <span class="cgal-item"> 填 data-src / data-text。
+     只在政大通展開時初始化，多實例事件各自綁定容器、不劫持整頁捲動。 -->
+<script type="module">
+import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from 'https://esm.sh/ogl@1.0.11';
+
+const CAPTION_FONT  = '600 26px "Noto Sans TC", system-ui, sans-serif';
+const CAPTION_COLOR = '#6b6d75';
+
+const lerp = (a, b, t) => a + (b - a) * t;
+
+/* 空白佔位卡：柔白瓷底＋細框＋淡「＋」與編號，融入淺色 premium 配色 */
+function placeholderCanvas(slot) {
+  const w = 700, h = 900, cv = document.createElement('canvas');
+  cv.width = w; cv.height = h;
+  const x = cv.getContext('2d');
+  const g = x.createLinearGradient(0, 0, 0, h);
+  g.addColorStop(0, '#f6f5f3'); g.addColorStop(1, '#ecebe8');
+  x.fillStyle = g; x.fillRect(0, 0, w, h);
+  const m = 46, r = 28;
+  x.strokeStyle = '#dcd8d2'; x.lineWidth = 2;
+  x.beginPath();
+  x.moveTo(m + r, m);
+  x.arcTo(w - m, m, w - m, h - m, r); x.arcTo(w - m, h - m, m, h - m, r);
+  x.arcTo(m, h - m, m, m, r);        x.arcTo(m, m, w - m, m, r);
+  x.closePath(); x.stroke();
+  const cx = w / 2, cy = h / 2, s = 30;
+  x.strokeStyle = '#cabfb2'; x.lineWidth = 3; x.lineCap = 'round';
+  x.beginPath(); x.moveTo(cx - s, cy); x.lineTo(cx + s, cy);
+  x.moveTo(cx, cy - s); x.lineTo(cx, cy + s); x.stroke();
+  x.fillStyle = '#c2b8ac'; x.font = '500 30px "Noto Sans TC", sans-serif';
+  x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.fillText(String(slot + 1).padStart(2, '0'), cx, cy + 84);
+  return cv;
+}
+
+function textTexture(gl, text, font, color) {
+  const cv = document.createElement('canvas'); const ctx = cv.getContext('2d');
+  ctx.font = font; const size = parseInt((font.match(/(\d+)px/) || [0, 30])[1], 10);
+  cv.width = Math.ceil(ctx.measureText(text).width) + 24;
+  cv.height = Math.ceil(size * 1.3) + 24;
+  ctx.font = font; ctx.fillStyle = color; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.clearRect(0, 0, cv.width, cv.height); ctx.fillText(text, cv.width / 2, cv.height / 2);
+  const texture = new Texture(gl, { generateMipmaps: false }); texture.image = cv;
+  return { texture, width: cv.width, height: cv.height };
+}
+
+class Title {
+  constructor({ gl, plane, text, color, font }) {
+    const { texture, width, height } = textTexture(gl, text, font, color);
+    const program = new Program(gl, {
+      vertex: `attribute vec3 position;attribute vec2 uv;uniform mat4 modelViewMatrix;uniform mat4 projectionMatrix;varying vec2 vUv;
+        void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+      fragment: `precision highp float;uniform sampler2D tMap;varying vec2 vUv;
+        void main(){vec4 c=texture2D(tMap,vUv);if(c.a<0.1)discard;gl_FragColor=c;}`,
+      uniforms: { tMap: { value: texture } }, transparent: true
+    });
+    const mesh = new Mesh(gl, { geometry: new Plane(gl), program });
+    const th = plane.scale.y * 0.13, tw = th * (width / height);
+    mesh.scale.set(tw, th, 1);
+    mesh.position.y = -plane.scale.y * 0.5 - th * 0.5 - 0.05;
+    mesh.setParent(plane);
+  }
+}
+
+class Media {
+  constructor(o) {
+    Object.assign(this, o); this.extra = 0;
+    this.createShader(); this.createMesh();
+    if (this.text) new Title({ gl: this.gl, plane: this.plane, text: this.text, color: this.textColor, font: CAPTION_FONT });
+    this.onResize();
+  }
+  createShader() {
+    const texture = new Texture(this.gl, { generateMipmaps: true });
+    this.program = new Program(this.gl, {
+      depthTest: false, depthWrite: false,
+      vertex: `precision highp float;attribute vec3 position;attribute vec2 uv;
+        uniform mat4 modelViewMatrix;uniform mat4 projectionMatrix;uniform float uTime;uniform float uSpeed;varying vec2 vUv;
+        void main(){vUv=uv;vec3 p=position;
+          p.z=(sin(p.x*4.0+uTime)*1.5+cos(p.y*2.0+uTime)*1.5)*(0.1+uSpeed*0.5);
+          gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.0);}`,
+      fragment: `precision highp float;uniform vec2 uImageSizes;uniform vec2 uPlaneSizes;uniform sampler2D tMap;uniform float uBorderRadius;varying vec2 vUv;
+        float rb(vec2 p,vec2 b,float r){vec2 d=abs(p)-b;return length(max(d,vec2(0.0)))+min(max(d.x,d.y),0.0)-r;}
+        void main(){
+          vec2 ratio=vec2(min((uPlaneSizes.x/uPlaneSizes.y)/(uImageSizes.x/uImageSizes.y),1.0),
+                          min((uPlaneSizes.y/uPlaneSizes.x)/(uImageSizes.y/uImageSizes.x),1.0));
+          vec2 uv=vec2(vUv.x*ratio.x+(1.0-ratio.x)*0.5,vUv.y*ratio.y+(1.0-ratio.y)*0.5);
+          vec4 color=texture2D(tMap,uv);
+          float d=rb(vUv-0.5,vec2(0.5-uBorderRadius),uBorderRadius);
+          float a=1.0-smoothstep(-0.002,0.002,d);
+          gl_FragColor=vec4(color.rgb,a);}`,
+      uniforms: {
+        tMap: { value: texture }, uPlaneSizes: { value: [0, 0] }, uImageSizes: { value: [0, 0] },
+        uSpeed: { value: 0 }, uTime: { value: 100 * Math.random() }, uBorderRadius: { value: this.borderRadius }
+      }, transparent: true
+    });
+    const setPlaceholder = () => {
+      const c = placeholderCanvas(this.slot);
+      texture.image = c; this.program.uniforms.uImageSizes.value = [c.width, c.height];
+    };
+    if (this.image) {
+      const img = new Image(); img.crossOrigin = 'anonymous'; img.src = this.image;
+      img.onload = () => { texture.image = img; this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight]; };
+      img.onerror = setPlaceholder;
+    } else {
+      setPlaceholder();
+    }
+  }
+  createMesh() { this.plane = new Mesh(this.gl, { geometry: this.geometry, program: this.program }); this.plane.setParent(this.scene); }
+  update(scroll, direction) {
+    this.plane.position.x = this.x - scroll.current - this.extra;
+    const x = this.plane.position.x, H = this.viewport.width / 2;
+    if (this.bend === 0) { this.plane.position.y = 0; this.plane.rotation.z = 0; }
+    else {
+      const B = Math.abs(this.bend), R = (H * H + B * B) / (2 * B), ex = Math.min(Math.abs(x), H);
+      const arc = R - Math.sqrt(R * R - ex * ex);
+      if (this.bend > 0) { this.plane.position.y = -arc; this.plane.rotation.z = -Math.sign(x) * Math.asin(ex / R); }
+      else { this.plane.position.y = arc; this.plane.rotation.z = Math.sign(x) * Math.asin(ex / R); }
+    }
+    this.speed = scroll.current - scroll.last;
+    this.program.uniforms.uTime.value += 0.04;
+    this.program.uniforms.uSpeed.value = this.speed;
+    const po = this.plane.scale.x / 2, vo = this.viewport.width / 2;
+    this.isBefore = this.plane.position.x + po < -vo;
+    this.isAfter = this.plane.position.x - po > vo;
+    if (direction === 'right' && this.isBefore) { this.extra -= this.widthTotal; this.isBefore = this.isAfter = false; }
+    if (direction === 'left' && this.isAfter) { this.extra += this.widthTotal; this.isBefore = this.isAfter = false; }
+  }
+  onResize({ screen, viewport } = {}) {
+    if (screen) this.screen = screen;
+    if (viewport) this.viewport = viewport;
+    if (!this.screen.width || !this.screen.height) return;
+    this.scale = this.screen.height / 1500;
+    this.plane.scale.y = (this.viewport.height * (900 * this.scale)) / this.screen.height;
+    this.plane.scale.x = (this.viewport.width * (700 * this.scale)) / this.screen.width;
+    this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
+    this.padding = 2;
+    this.width = this.plane.scale.x + this.padding;
+    this.widthTotal = this.width * this.length;
+    this.x = this.width * this.index;
+  }
+}
+
+class App {
+  constructor(container, { items, bend = 2, textColor = CAPTION_COLOR, borderRadius = 0.05, scrollSpeed = 2, scrollEase = 0.05 }) {
+    this.container = container;
+    this.scrollSpeed = scrollSpeed;
+    this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0, position: 0 };
+    this.raf = null; this.isDown = false;
+    this.createRenderer(); this.createCamera(); this.scene = new Transform();
+    this.onResize();
+    this.planeGeometry = new Plane(this.gl, { heightSegments: 50, widthSegments: 100 });
+    this.createMedias(items, bend, textColor, borderRadius);
+    this.bindEvents();
+    this.render(); // 先畫一幀
+  }
+  createRenderer() {
+    this.renderer = new Renderer({ alpha: true, antialias: true, dpr: Math.min(window.devicePixelRatio || 1, 2) });
+    this.gl = this.renderer.gl; this.gl.clearColor(0, 0, 0, 0);
+    this.container.appendChild(this.gl.canvas);
+  }
+  createCamera() { this.camera = new Camera(this.gl); this.camera.fov = 45; this.camera.position.z = 20; }
+  createMedias(items, bend, textColor, borderRadius) {
+    const len = items.length;
+    this.mediasImages = items.concat(items); // 複製一份做無限循環
+    this.medias = this.mediasImages.map((data, index) => new Media({
+      geometry: this.planeGeometry, gl: this.gl, image: data.image, text: data.text,
+      slot: index % len, index, length: this.mediasImages.length,
+      scene: this.scene, screen: this.screen, viewport: this.viewport,
+      bend, textColor, borderRadius
+    }));
+  }
+  /* 事件：down/keydown 綁容器；move/up 綁 window 但僅在拖曳時作用；不綁 wheel（不劫持捲頁） */
+  bindEvents() {
+    this.onDown = (e) => { this.isDown = true; this.container.classList.add('dragging'); this.scroll.position = this.scroll.current; this.startX = e.clientX; };
+    this.onMove = (e) => { if (!this.isDown) return; const d = (this.startX - e.clientX) * (this.scrollSpeed * 0.025); this.scroll.target = this.scroll.position + d; };
+    this.onUp = () => { if (!this.isDown) return; this.isDown = false; this.container.classList.remove('dragging'); this.snap(); };
+    this.onKey = (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); this.scroll.target += this.scrollSpeed * 5; this.snap(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); this.scroll.target -= this.scrollSpeed * 5; this.snap(); }
+    };
+    this.onResizeBound = () => this.onResize();
+    this.container.addEventListener('pointerdown', this.onDown);
+    window.addEventListener('pointermove', this.onMove);
+    window.addEventListener('pointerup', this.onUp);
+    this.container.addEventListener('keydown', this.onKey);
+    window.addEventListener('resize', this.onResizeBound);
+  }
+  snap() {
+    if (!this.medias || !this.medias[0]) return;
+    const w = this.medias[0].width, i = Math.round(Math.abs(this.scroll.target) / w), t = w * i;
+    this.scroll.target = this.scroll.target < 0 ? -t : t;
+  }
+  onResize() {
+    this.screen = { width: this.container.clientWidth, height: this.container.clientHeight };
+    if (!this.screen.width || !this.screen.height) return;
+    this.renderer.setSize(this.screen.width, this.screen.height);
+    this.camera.perspective({ aspect: this.screen.width / this.screen.height });
+    const fov = (this.camera.fov * Math.PI) / 180;
+    const h = 2 * Math.tan(fov / 2) * this.camera.position.z;
+    this.viewport = { width: h * this.camera.aspect, height: h };
+    if (this.medias) this.medias.forEach(m => m.onResize({ screen: this.screen, viewport: this.viewport }));
+  }
+  render() {
+    this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
+    const dir = this.scroll.current > this.scroll.last ? 'right' : 'left';
+    if (this.medias) this.medias.forEach(m => m.update(this.scroll, dir));
+    this.renderer.render({ scene: this.scene, camera: this.camera });
+    this.scroll.last = this.scroll.current;
+  }
+  play() { if (this.raf) return; const loop = () => { this.render(); this.raf = requestAnimationFrame(loop); }; this.raf = requestAnimationFrame(loop); }
+  pause() { if (this.raf) { cancelAnimationFrame(this.raf); this.raf = null; } }
+  destroy() {
+    this.pause();
+    this.container.removeEventListener('pointerdown', this.onDown);
+    window.removeEventListener('pointermove', this.onMove);
+    window.removeEventListener('pointerup', this.onUp);
+    this.container.removeEventListener('keydown', this.onKey);
+    window.removeEventListener('resize', this.onResizeBound);
+    if (this.gl?.canvas?.parentNode) this.gl.canvas.parentNode.removeChild(this.gl.canvas);
+  }
+}
+
+/* ---- 初始化：政大通展開時才建立三個畫廊，收合時暫停 RAF ---- */
+(function () {
+  const nccu = document.getElementById('p-nccupass');
+  const containers = [...document.querySelectorAll('.cgal[data-cgal]')];
+  if (!nccu || !containers.length) return;
+
+  const readItems = (c) => [...c.querySelectorAll('.cgal-item')].map(el => ({
+    image: (el.dataset.src || '').trim(), text: (el.dataset.text || '').trim()
+  }));
+
+  let apps = null;
+  function ensure() {
+    if (apps) return;
+    try {
+      apps = containers.map(c => {
+        const app = new App(c, { items: readItems(c), bend: parseFloat(c.dataset.bend || '2.2') });
+        new ResizeObserver(() => app.onResize()).observe(c);
+        return app;
+      });
+    } catch (err) {
+      console.error('CircularGallery 初始化失敗：', err);
+      apps = [];
+    }
+  }
+  function sync() {
+    if (nccu.classList.contains('open')) {
+      ensure();
+      requestAnimationFrame(() => apps.forEach(a => { a.onResize(); a.play(); }));
+    } else if (apps) {
+      apps.forEach(a => a.pause());
+    }
+  }
+  new MutationObserver(sync).observe(nccu, { attributes: true, attributeFilter: ['class'] });
+  sync(); // 若載入時已展開
+})();
 </script>
 </body>
 </html>
