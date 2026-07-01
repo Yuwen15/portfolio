@@ -295,10 +295,9 @@ section{padding-block:clamp(64px,9vw,128px);position:relative}
 
 /* ---------- case galleries: circular (WebGL, ported from reactbits) ---------- */
 .cgal{position:relative;width:100%;height:clamp(300px,40vw,430px);margin-top:16px;
-  border-radius:12px;overflow:hidden;cursor:grab;outline:none;
+  overflow:hidden;cursor:grab;outline:none;
   touch-action:pan-y;                 /* 直向仍可捲頁，橫向拖曳給畫廊 */
-  background:radial-gradient(120% 130% at 50% -10%,var(--bg-2),var(--bg-3));
-  border:1px solid var(--line-soft)}
+  background:transparent;border:0}    /* 無外框、無底色，卡片直接浮在頁面上 */
 .cgal.dragging{cursor:grabbing}
 .cgal:focus-visible{box-shadow:0 0 0 2px var(--accent)}
 .cgal canvas{display:block;width:100%;height:100%}
@@ -488,7 +487,7 @@ html.js .r.in{opacity:1;transform:none}
                   <div class="row result"><div class="lab">成果</div><p>拿下 <b>AI 跨域永續競賽季軍</b> 與 <b>數創大賞佳作</b>，完成前後端開發，正與學校洽談合作上架。</p></div>
                   <!-- FoundPass 照片輪播（5 格）。補圖：把 data-src 換成圖片路徑、data-text 填圖說即可。
                        現成可用：foundpass-app.png / foundpass-award.jpg / foundpass-award2.jpg -->
-                  <div class="cgal" data-cgal="foundpass" data-bend="2.2" tabindex="0" role="region" aria-label="FoundPass 專案照片輪播">
+                  <div class="cgal" data-cgal="foundpass" data-bend="0" tabindex="0" role="region" aria-label="FoundPass 專案照片輪播">
                     <span class="cgal-item" data-src="" data-text=""></span>
                     <span class="cgal-item" data-src="" data-text=""></span>
                     <span class="cgal-item" data-src="" data-text=""></span>
@@ -510,7 +509,7 @@ html.js .r.in{opacity:1;transform:none}
                   <div class="row"><div class="lab">解法</div><p>定義產品規格：上傳企劃書 PDF → AI 產出<b>五維雷達圖</b>（市場、創新、商模、可行性、邏輯）→ 創投／PM／行銷總監多角色點評 → 一鍵複製改善建議。我負責功能描述、UI/UX 規格、API 定義、驗收標準與 User Flow。</p></div>
                   <div class="row result"><div class="lab">成果</div><p>初版上線後用戶測試發現：學生不信任 AI 評分、認為沒比一般 AI 準。<b>這個洞察讓團隊及時轉向</b>，改開發更貼近需求的新功能——在資源有限下快速驗證假設、用真實回饋做決策。</p></div>
                   <!-- CompetitionPass 照片輪播（5 格）。現成可用：competitionpass-radar.png / competitionpass-poster.png -->
-                  <div class="cgal" data-cgal="competitionpass" data-bend="2.2" tabindex="0" role="region" aria-label="CompetitionPass 競賽孵化器 專案照片輪播">
+                  <div class="cgal" data-cgal="competitionpass" data-bend="0" tabindex="0" role="region" aria-label="CompetitionPass 競賽孵化器 專案照片輪播">
                     <span class="cgal-item" data-src="" data-text=""></span>
                     <span class="cgal-item" data-src="" data-text=""></span>
                     <span class="cgal-item" data-src="" data-text=""></span>
@@ -531,7 +530,7 @@ html.js .r.in{opacity:1;transform:none}
                   <div class="row"><div class="lab">流程</div><p>招新與籌備靠人工往返、SOP 口頭傳承。串接 AI 工具 + <b>Google Apps Script</b> 自動化招新流程、建立 SOP、導入 <b>OKR</b> 追蹤。</p></div>
                   <div class="row result"><div class="lab">成果</div><p>「創辦人時間」<b>參與率 95%、滿意度 4.9/5</b>，92% 成員期待持續辦理；招新流程縮短至 <b>2 個工作日</b>、籌備降至 1 次會議，活動參與度均達 90%、滿意度均 4.5/5 以上。</p></div>
                   <!-- 品牌與組織 照片輪播（5 格）。現成可用：brandbook.png / team-event.jpg -->
-                  <div class="cgal" data-cgal="brand" data-bend="2.2" tabindex="0" role="region" aria-label="品牌建立與組織優化 專案照片輪播">
+                  <div class="cgal" data-cgal="brand" data-bend="0" tabindex="0" role="region" aria-label="品牌建立與組織優化 專案照片輪播">
                     <span class="cgal-item" data-src="" data-text=""></span>
                     <span class="cgal-item" data-src="" data-text=""></span>
                     <span class="cgal-item" data-src="" data-text=""></span>
@@ -984,13 +983,6 @@ function placeholderCanvas(slot) {
   const g = x.createLinearGradient(0, 0, 0, h);
   g.addColorStop(0, '#f6f5f3'); g.addColorStop(1, '#ecebe8');
   x.fillStyle = g; x.fillRect(0, 0, w, h);
-  const m = 46, r = 28;
-  x.strokeStyle = '#dcd8d2'; x.lineWidth = 2;
-  x.beginPath();
-  x.moveTo(m + r, m);
-  x.arcTo(w - m, m, w - m, h - m, r); x.arcTo(w - m, h - m, m, h - m, r);
-  x.arcTo(m, h - m, m, m, r);        x.arcTo(m, m, w - m, m, r);
-  x.closePath(); x.stroke();
   const cx = w / 2, cy = h / 2, s = 30;
   x.strokeStyle = '#cabfb2'; x.lineWidth = 3; x.lineCap = 'round';
   x.beginPath(); x.moveTo(cx - s, cy); x.lineTo(cx + s, cy);
