@@ -27,3 +27,6 @@ node_modules/
 assets/foundpass/
 assets/competitionpass/
 assets/brand/
+
+# 圖片處理工具腳本（本機用，不上公開 repo）
+_tools/
