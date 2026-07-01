@@ -22,3 +22,8 @@ assets/圖片放這裡_清單.md
 Thumbs.db
 node_modules/
 .vercel/
+
+# 畫廊原始待處理圖（只上傳壓縮後的 foundpass-N 等）
+assets/foundpass/
+assets/competitionpass/
+assets/brand/
